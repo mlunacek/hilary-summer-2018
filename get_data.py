@@ -18,9 +18,9 @@ template = jin.Template("""
   </head>
 
   <body>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+    <script src="https://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
     <script type="text/javascript" src="https://rawgit.com/jieter/Leaflet.encoded/master/Polyline.encoded.js"></script>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+    <link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
     <div id="map" style="width: 100%; height: 100%"></div>
 
     <script>
@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     token = HILARY_TOKEN
     token = MONTE_TOKEN
-    
+
     headers = {'Authorization': "Bearer {0}".format(token)}
 
     lines = []
@@ -107,6 +107,6 @@ if __name__ == "__main__":
 
     with open('index.html', 'w') as outfile:
         outfile.write(template.render(polylines=json.dumps([ x for x in lines if x]),
-                                    polyRides=json.dumps([ x for x in rides if x]),
+                                      polyRides=json.dumps([ x for x in rides if x]),
                                     ))
 
