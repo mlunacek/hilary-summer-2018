@@ -1,0 +1,59 @@
+
+<html>
+  <head>
+    <title>Hilary's summer</title>
+  </head>
+
+  <body>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/jieter/Leaflet.encoded/master/Polyline.encoded.js"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+    <div id="map" style="width: 100%; height: 100%"></div>
+
+    <script>
+    
+   
+    
+    var map = L.map('map').setView([40.0150, -105.2705], 11);
+    
+
+    var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}', {
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        subdomains: 'abcd',
+        minZoom: 1,
+        maxZoom: 16,
+        ext: 'png'
+    }).addTo(map);
+    
+    var encodedRoutesRides = [];
+    for (let encoded of encodedRoutesRides) {
+      var coordinates = L.Polyline.fromEncoded(encoded).getLatLngs();
+      L.polyline(
+          coordinates,
+          {
+              color: 'darkblue',
+              weight: 3,
+              opacity: .5,
+              lineJoin: 'round'
+          }
+      ).addTo(map);
+    }
+
+    var encodedRoutes = ["gmqqFze|`SmGbHsIvBsFw@oAgGyIVyBdRX`WiFlIkD|[kEzFlChGkDrDgUKoAvFoC|BaA`HqFvIeHaAaDaD@bBeA@bAO?cBtDvC`H|@hFgI`AkHtCiCfAeFlUBbDiDmBoGhDuFhDe\\vE{Gg@sPdDqZxIElArGjFn@|IuBlNeO", "ktasFvekaSeEnMjIlA\\|ZjBjEcAfFx@piAkDjCClE~CxPlLhFhCfF|ClOkDiFlArFi@tEzAp@zEhSvAzRlAy@dEtCj@uHtBUuDlL}ErBkGkLgEgVoDkJCeDzAgBaNoIiNe\\v@w@nLfF}CmQ~Cga@k@sm@zAeJ_CeEU{YiIqA|DsM", "edqqFp_jaSz@\\uJaOaJqBzCaCkE{@JeBvA?^zC_Ad@kD_F|@cBfLrDVgCuA`DpBbAh@gB}AnAfA~AhAkAQyBgBdCfCdBl@uBm@eAyHhDoA_AjBgBtDlCzAiBo@_BqC~BbBrDvAaBgCmDqHnCm@{@jBaAdGlEnMi@KwAkDP|B}Bq@_@sAjAr@bDvDPtA_BgByCqFvBuAkD`H_GqF?rD`@@pDsA`AyFaJ`@oBtBDjD`HcB`@_GqM{Dy`@gCn@cA`IhGhRa@vDeAk@bCHSdEmAc@mBwNnCyCpChBi@hGiFxC}BaOdBaBvA~@IzBgDIlCeBjAlBa@zByOtBgAi@XgA~AXVrBkDlBnAkB|AbDuAzBqB_@hAqArB`AfE`KfMrInGIu@uBaCvDgBCmAwMoErBKgBrAs@bAzAeAz@\\sBlBtBmBvAv@_FiFmAWiA`Ag@dGtL|GMs@kAa^pE|AeBvJhAzMlFlAkBaMcDsGfFqAa@hBeB`H~DrCM{A}BwLzCxCcBxMbE~@iFfG_BQoLoIhFiW~GHwB`EChEyChAyQcIuMkBNGrC|Ax@~@{AwDuIj@aFgBeIgDwEgGHwDrG}B|MbAtI`ERbCkBmBaAtAkAYuI", "kegsFjoqaSzd@iKx_@cTxVeh@rEsRzKqH|A{N`FkCGwHhAwEx^gu@fKlFxEoM", "}tasF~dkaSoE~MuJqFw^tu@{@pEXpHcFnBc@bIyCnH_JxE{CnOgX~j@ob@nU}a@|KgAuB", "a~`mFtmmkSvErCfCbK|GpCu@tCdEj@WnApA~@k@n@bF`InIQpE~Dg@zBdHrBrFwB_E`KdAjIoAdBwJqC_JlCqGlP}KhFaEhMqY~MaMbSZbG{DtCFtR{BJfCjFXjEyDnPoBtEg@sBkCLaJjIe@xCiAPBpDeNvLm@nEwEnEfFFrIhGtOaDpE|ExEPaAtHxHmDzFwIjTmJtFjBdJpKlEKxEjClNgB|A|HfEo@~ZhHfE`D|F@lMnLpEcArH`HpJdCzJfIrTh[pApGnLvLrCbLbIzHVfElNbSnV|U~PzEjH`K~DzAtAvi@eCkA}HfVgJbEk@jM", "emwmFtiekSrKxG~PzChGk@veAbNfPnFtFrK~GnClHqBlPzBvXnLjDpEpNdEVnF|FnAlDvDpHUpKdElKhObDj@hMzKbJV`DjGrGp@bIrJzIB|T`KdOFzR{F~[|HjI`FpKuAnCzHzG`@rOeEfCuBnAsF~JwA|X|O~PkFzGdKlJ}@jKnEbLiAjR`JnNh@vKtF`XxBv@|BnKhFhLdObFv@dRlM", "_r`sFz_jaSjPQxAqB|NoA`CgIvKaOlNcBqBqMlRvBl@jN~k@FrKkK~GrF`A|eA_Lpb@s@}FoEjDjAeI{EIaAnPzAnA]fe@gJd@NnNqG~[zF`LDdKnClD`AnRhD`K]zKgMvIsNlCYlEsAxAkFl@`BeEeEw@cEzCaAtEsMeGuCpAyApD}O}Ai@`DxA`HaFaIqOhDqAtIiEeCaAzAqAwT{AiBeCoPsAi@d@_E}@qGxChGyCmPgCeFoLeEcDmRNgOrCeRy@qn@~AcIwBcDWuf@yCkC", "igqqF|`|`SmC~BnAhCwDk@{EfF_IbCaGk@sAcHcJd@gCh]tAxYqA|AlAdNuArDkAp[}FtIkJv\\`@di@lJuBrBmDpFyBvKr@|F}CeF_[`Fe`@m@}`@m@qCsRzEtAwGsAcMrA}AwAa^bCsYzJYn@xFfGlAxIeC~E}F|CpAeAiD", "mufsFjb~aScBq]yAyC}G_CyFmV{@xEmD~EfEtHa@vClAhG{JuCCbOmNwTh@tEcAdHsC`Cz@~MsEyADyD{BzAkBuE|@pMgCbGbAzEaEqAkC_RiK`GuExKyCo@_KtHo@`KjA~BtEtAgEwCr@}D`DiD{B|C?bClH`BjBbF_@_FuHyBV}AjF}EjD~@tLgYfEpPuBsVfC|PpDfBi@uCdCyHy@{MdBdEhCQoCbMvEqA~AdHz@LbE}D`B|Bu@|Dp@nBnCeAtCjBbAeBlAvAxCwBjJa@|A_BViHnKiD", "}v`sFf_jaSrTEf@iBfP{@dBsHfMqPr^He@g`@tWrAYuSmNyDwCqHcJsKm^gCgNiK_CtAs[IA|m@mFvQdBjIoAGhEjLf@~LqA~GJpLoAA", "ov`sFr~iaSOwJhIGxEaDrAeHCmRs@_AvDkExFeT|LeC^gPpE}EbMr@bPhPnCrENvKpAbBzSZGgTkNaDiGwNwFuFo_@kCcNgKoLnBeQo@IiZqBoBwAt@`ApC?hKwIrCcDsBwKmQwKp@k^iL}GAmC~Bo@kC}HWiI~@w@|GcSi@mA`J\\fs@wA|@e@pFd@`]^~BdBREh]dAg@{@zCbA]_Ah@A`FjI}@rFzBxD{BpDbB~J~T?fFvBtCHdI|NhJzJl@nAmBfHJjJhGpF_O", "gtasF|ekaSeElMrItATr[`BnD{@|En@dhAiErGxDrTpLdFzCtFtCzOoDeGtAvHq@rCpBhBrB~NtAhBv@~Rj@p@v@aB|DdDz@cJpB@wApAkAzImDUiAvBuAcCsGqRkAmMaEcJJ{CvAkA_NuJcNk\\lLxGr@{@cDkTjD}Es@c~@XeObAyAyBeDm@{c@oCoF", "uo~rF`}naSn@vAcBdChHpKYnG~AzG_KdWyAf^pLhN`AHKyCnFiE~El@cHzJ|AlIs@hFv@zI[zIcA}@f@bEdFfF~DbZhCpGcFxJlAxH}@dFqC|A{CzJiLsC~A`CgA`CVlFyAwCX_Dw@hHkDnB}MoFpDhHqBCeC`Es@i@LmIyCfFqKqJ~@jJgHm@iCrDkCsGFyI`BmEi@uFdCwBt@_F}B\\DcC}@zBe@wHuHwEaDP{@`@~BzBO`CuEhHWmGsFu@eDrCwFsAnD~C|F?kDdL}GQ}CjCb@bDsEtAcKxNaHEqHnFeFeVpGmDkBk@KwFyFwHt@sGcBcC\\sNoBsCxE{NCeKbE_FT_HpTRpBeIpHyBoDeDf@gDnGzGe@kCrCsGvPbFtF}@lGhLx@kBnDNfA_JjAkAgBr@}@lHoDoCwAfAuA_TwEcSaBsAh@qE_AcF|CrFiAcGlBh@Sio@pCyKxA_BpJE|j@FtDbB`A_Bq@uB"];
+    for (let encoded of encodedRoutes) {
+      var coordinates = L.Polyline.fromEncoded(encoded).getLatLngs();
+      L.polyline(
+          coordinates,
+          {
+              color: 'red',
+              weight: 3,
+              opacity: .5,
+              lineJoin: 'round'
+          }
+      ).addTo(map);
+      
+      
+    }
+    </script>
+  </body>
+</html>
