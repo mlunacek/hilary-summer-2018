@@ -75,10 +75,13 @@ template = jin.Template("""
 if __name__ == "__main__":
 
 
-    token = HILARY_TOKEN
+
     token = MONTE_TOKEN
+    token = HILARY_TOKEN
 
     headers = {'Authorization': "Bearer {0}".format(token)}
+
+    print(headers)
 
     lines = []
     rides = []
